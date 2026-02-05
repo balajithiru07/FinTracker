@@ -134,7 +134,7 @@ const Dashboard = () => {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <h3 className="font-semibold text-lg text-slate-700 mb-6 pl-2 border-l-4 border-indigo-500">Expenses by Category</h3>
-                    <div className="h-72 w-full">
+                    <div className="h-72 w-full" style={{ minHeight: '300px' }}>
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
                                 <Pie
@@ -167,7 +167,7 @@ const Dashboard = () => {
 
                 <div className="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
                     <h3 className="font-semibold text-lg text-slate-700 mb-6 pl-2 border-l-4 border-emerald-500">Spending Overview</h3>
-                    <div className="h-72 w-full">
+                    <div className="h-72 w-full" style={{ minHeight: '300px' }}>
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={categoryData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                                 <XAxis dataKey="name" hide />

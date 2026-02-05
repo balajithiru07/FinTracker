@@ -20,8 +20,11 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
+    // Construct API URL logic
+    // We expect VITE_API_BASE_URL to be the host (e.g. https://myapp.onrender.com)
+    // We will append /api/expenses to it.
     const API_URL = import.meta.env.VITE_API_BASE_URL
-        ? `${import.meta.env.VITE_API_BASE_URL}/expenses`
+        ? `${import.meta.env.VITE_API_BASE_URL}/api/expenses`
         : 'http://127.0.0.1:5000/api/expenses';
 
     // Actions
