@@ -7,17 +7,25 @@ class InMemoryCollection {
         this.data = [];
     }
 
-    async find(query = {}) {
-        let results = [...this.data];
-        // Basic sort support (mocking .sort({ date: -1 }))
-        return {
-            sort: ({ date }) => {
+    find(query = {}) {
+        // Return a "Query" like object that is also a Promise (thenable)
+        const activeData = [...this.data];
+
+        const queryObj = {
+            then: function (resolve, reject) {
+                // This makes it awaitable directly (e.g. await Expense.find())
+                resolve(activeData);
+            },
+            sort: function ({ date }) {
                 if (date === -1) {
-                    return results.sort((a, b) => new Date(b.date) - new Date(a.date));
+                    activeData.sort((a, b) => new Date(b.date) - new Date(a.date));
                 }
-                return results;
+                // Return self to allow await after sort (e.g. await Expense.find().sort(...))
+                return this;
             }
         };
+
+        return queryObj;
     }
 
     async findById(id) {

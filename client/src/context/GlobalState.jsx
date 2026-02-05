@@ -20,7 +20,9 @@ export const GlobalContext = createContext(initialState);
 export const GlobalProvider = ({ children }) => {
     const [state, dispatch] = useReducer(AppReducer, initialState);
 
-    const API_URL = 'http://127.0.0.1:5000/api/expenses';
+    const API_URL = import.meta.env.VITE_API_BASE_URL
+        ? `${import.meta.env.VITE_API_BASE_URL}/expenses`
+        : 'http://127.0.0.1:5000/api/expenses';
 
     // Actions
     async function getExpenses() {

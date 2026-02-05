@@ -61,6 +61,19 @@ router.post('/', async (req, res) => {
 
 // ...
 
+// @desc    Get Settings
+// @route   GET /api/expenses/settings
+router.get('/settings', async (req, res) => {
+    try {
+        const Settings = getModel('Settings');
+        const settings = await Settings.findOne();
+        res.json({ success: true, data: settings || { monthlyLimit: 0, dailyLimit: 0 } });
+    } catch (err) {
+        console.error('Error fetching settings:', err);
+        res.status(500).json({ success: false, error: 'Server Error' });
+    }
+});
+
 // @desc    Update Settings
 // @route   POST /api/expenses/settings
 router.post('/settings', async (req, res) => {
